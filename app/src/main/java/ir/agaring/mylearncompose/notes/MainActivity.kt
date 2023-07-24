@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 import ir.agaring.mylearncompose.movie.navigation.MovieNavigation
 import ir.agaring.mylearncompose.notes.data.NoteDataSource
 import ir.agaring.mylearncompose.notes.model.Note
@@ -43,6 +44,7 @@ import ir.agaring.mylearncompose.notes.screen.NoteScreen
 import ir.agaring.mylearncompose.notes.screen.NoteViewModel
 import ir.agaring.mylearncompose.ui.theme.MyLearnComposeTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
