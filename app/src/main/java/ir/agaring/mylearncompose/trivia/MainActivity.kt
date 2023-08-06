@@ -1,4 +1,4 @@
-package ir.agaring.mylearncompose.notes
+package ir.agaring.mylearncompose.trivia
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -18,8 +18,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val noteViewModel: NoteViewModel by viewModels()
-            MyApp(noteViewModel = noteViewModel)
+            MyApp()
         }
     }
 }
@@ -29,14 +28,10 @@ class MainActivity : ComponentActivity() {
 
 //--------------------------------------------------------------------------------------------------
 @Composable
-fun MyApp(noteViewModel: NoteViewModel) {
-    val noteList = noteViewModel.noteList.collectAsState().value
+@Preview
+fun MyApp() {
     MyLearnComposeTheme {
-        NoteScreen(
-            notes = noteList,
-            onAddNote = { noteViewModel.addNote(it) },
-            onRemoveNote = { noteViewModel.removeNote(it) }
-        )
+
     }
 }
 //--------------------------------------------------------------------------------------------------

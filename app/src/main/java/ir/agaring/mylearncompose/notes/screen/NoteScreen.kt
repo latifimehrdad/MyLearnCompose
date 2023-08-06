@@ -17,7 +17,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,6 +36,7 @@ import ir.agaring.mylearncompose.notes.component.NoteButton
 import ir.agaring.mylearncompose.notes.component.NoteInputText
 import ir.agaring.mylearncompose.notes.data.NoteDataSource
 import ir.agaring.mylearncompose.notes.model.Note
+import ir.agaring.mylearncompose.notes.util.formatDate
 import java.time.format.DateTimeFormatter
 
 /**
@@ -174,7 +174,7 @@ fun NoteRow(
             )
 
             Text(
-                text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d MMM")),
+                text = formatDate(note.entryDate.time),
                 style = MaterialTheme.typography.labelSmall
             )
         }
