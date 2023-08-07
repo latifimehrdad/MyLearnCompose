@@ -1,37 +1,41 @@
 package ir.agaring.mylearncompose.trivia
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import dagger.hilt.android.AndroidEntryPoint
-import ir.agaring.mylearncompose.notes.screen.NoteScreen
-import ir.agaring.mylearncompose.notes.screen.NoteViewModel
-import ir.agaring.mylearncompose.ui.theme.MyLearnComposeTheme
+import ir.agaring.mylearncompose.trivia.screens.QuestionViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApp()
+            val viewModel: QuestionViewModel by viewModels()
+            TriviaHome(viewModel = viewModel)
         }
     }
 }
 
 
-
-
-//--------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------- TriviaHome
 @Composable
-@Preview
-fun MyApp() {
-    MyLearnComposeTheme {
-
-    }
+fun TriviaHome(viewModel: QuestionViewModel) {
+    Questions(viewModel = viewModel)
 }
-//--------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------- TriviaHome
+
+
+//-------------------------------------------------------------------------------------------------- Questions
+@Composable
+fun Questions(viewModel: QuestionViewModel) {
+    val questions = viewModel.data.value.data?.toMutableList()
+    if (viewModel.data.value.loading == false)
+        Log.d("meri", "questions : ${questions?.size}")
+    else
+        Log.d("meri", "Loading")
+}
+//-------------------------------------------------------------------------------------------------- Questions
