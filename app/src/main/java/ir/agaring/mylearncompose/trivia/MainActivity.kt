@@ -8,34 +8,18 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import dagger.hilt.android.AndroidEntryPoint
 import ir.agaring.mylearncompose.trivia.screens.QuestionViewModel
+import ir.agaring.mylearncompose.trivia.screens.TriviaHome
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val viewModel: QuestionViewModel by viewModels()
-            TriviaHome(viewModel = viewModel)
+            TriviaHome()
         }
     }
 }
 
 
-//-------------------------------------------------------------------------------------------------- TriviaHome
-@Composable
-fun TriviaHome(viewModel: QuestionViewModel) {
-    Questions(viewModel = viewModel)
-}
-//-------------------------------------------------------------------------------------------------- TriviaHome
 
 
-//-------------------------------------------------------------------------------------------------- Questions
-@Composable
-fun Questions(viewModel: QuestionViewModel) {
-    val questions = viewModel.data.value.data?.toMutableList()
-    if (viewModel.data.value.loading == false)
-        Log.d("meri", "questions : ${questions?.size}")
-    else
-        Log.d("meri", "Loading")
-}
-//-------------------------------------------------------------------------------------------------- Questions
