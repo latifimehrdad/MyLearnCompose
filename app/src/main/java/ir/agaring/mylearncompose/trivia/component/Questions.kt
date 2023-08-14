@@ -37,6 +37,7 @@ import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextIndent
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -129,7 +130,7 @@ fun QuestionDisplay(
 
             if (questionIndex.value >= 3)
                 ShowProgress(score = questionIndex.value)
-            QuestionTracker(counter = questionIndex.value + 1)
+            QuestionTracker(counter = questionIndex.value + 1, viewModel.getTotalQuestionCount())
             DrawDottedLine(pathEffect = pathEffect)
             Column {
                 Text(
@@ -217,7 +218,7 @@ fun QuestionDisplay(
                         .padding(3.dp)
                         .align(alignment = Alignment.CenterHorizontally),
                     shape = RoundedCornerShape(34.dp),
-                    colors = ButtonDefaults.buttonColors(
+                    colors = buttonColors(
                         containerColor = AppColors.mLightBlue
                     ), onClick = { onNextClick(questionIndex.value) }) {
                     Text(
@@ -238,7 +239,7 @@ fun QuestionDisplay(
 
 //-------------------------------------------------------------------------------------------------- QuestionTracker
 @Composable
-fun QuestionTracker(counter: Int = 10, outOf: Int = 100) {
+fun QuestionTracker(counter: Int = 10, outOf: Int) {
     Text(text = buildAnnotatedString {
         withStyle(style = ParagraphStyle(textIndent = TextIndent.None)) {
             withStyle(
@@ -327,6 +328,14 @@ fun ShowProgress(score: Int = 12) {
                 disabledContainerColor = Color.Transparent
             )
         ) {
+
+            Text(text = (score * 10).toString(),
+                modifier = Modifier.clip(shape = RoundedCornerShape(23.dp))
+                    .fillMaxHeight(0.87f)
+                    .fillMaxWidth()
+                    .padding(6.dp),
+                color = AppColors.mOffWhite,
+                textAlign = TextAlign.Center)
 
         }
     }
