@@ -47,7 +47,7 @@ fun WeatherSplashScreen(navController: NavController) {
                 OvershootInterpolator(5f).getInterpolation(it)
             }))
         delay(2000L)
-        navController.navigate(WeatherScreens.MainScreen.name)
+        navController.navigate(WeatherScreens.MainScreen.name + "/Karaj")
     })
 
 

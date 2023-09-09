@@ -2,11 +2,14 @@ package ir.agaring.mylearncompose.weather.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import ir.agaring.mylearncompose.weather.screens.main.MainScreen
 import ir.agaring.mylearncompose.weather.screens.main.MainViewModel
+import ir.agaring.mylearncompose.weather.screens.search.SearchScreen
 import ir.agaring.mylearncompose.weather.screens.splash.WeatherSplashScreen
 
 /**
@@ -26,9 +29,26 @@ fun WeatherNavigation() {
             WeatherSplashScreen(navController = navController)
         }
 
-        composable(route = WeatherScreens.MainScreen.name) {
-            val viewModel = hiltViewModel<MainViewModel>()
-            MainScreen(navController = navController, viewModel = viewModel)
+        //www.google.com/cityname="seattle"
+        val route = WeatherScreens.MainScreen.name
+        composable(route = "$route/{city}",
+            arguments = listOf(
+                navArgument(name = "city") {
+                    type = NavType.StringType
+                }
+            )) {navBack ->
+            navBack.arguments?.getString("city").let { city ->
+
+                val viewModel = hiltViewModel<MainViewModel>()
+                MainScreen(
+                    navController = navController,
+                    viewModel = viewModel,
+                    city = city)
+            }
+        }
+
+        composable(route = WeatherScreens.SearchScreen.name) {
+            SearchScreen(navController = navController)
         }
 
     }
