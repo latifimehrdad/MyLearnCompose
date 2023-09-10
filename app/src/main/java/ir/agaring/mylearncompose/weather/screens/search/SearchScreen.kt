@@ -31,6 +31,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import ir.agaring.mylearncompose.weather.navigation.WeatherScreens
 import ir.agaring.mylearncompose.weather.widgets.WeatherAppBar
 
 /**
@@ -65,8 +66,8 @@ fun SearchScreen(navController: NavController) {
                         .fillMaxWidth()
                         .padding(16.dp)
                         .align(Alignment.CenterHorizontally)
-                ) {
-                    Log.d("meri", it)
+                ) {mCity ->
+                    navController.navigate(WeatherScreens.MainScreen.name + "/$mCity")
                 }
             }
         }

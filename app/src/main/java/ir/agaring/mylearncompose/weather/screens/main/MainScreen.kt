@@ -55,8 +55,8 @@ fun MainScreen(
         } else if (weatherData.data != null) {
             MainScaffold(questions = weatherData.data!!, navController = navController)
         }*/
-    Log.d("meri", city.toString())
-    MainScaffold(navController = navController)
+    Log.d("meri", "city : ${city.toString()}")
+    MainScaffold(navController = navController, city = city.toString())
 }
 //-------------------------------------------------------------------------------------------------- MainScreen
 
@@ -64,11 +64,11 @@ fun MainScreen(
 //-------------------------------------------------------------------------------------------------- MainScaffold
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScaffold(navController: NavController) {
+fun MainScaffold(navController: NavController, city: String) {
     Scaffold(
         topBar = {
             WeatherAppBar(
-                title = "HelLo ghfh",
+                title = city,
                 navController = navController,
                 onAddActionClick = {
                     navController.navigate(route = WeatherScreens.SearchScreen.name)
