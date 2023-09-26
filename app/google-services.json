@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "754559982725",
+    "project_id": "jetareader-add94",
+    "storage_bucket": "jetareader-add94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754559982725:android:29a06e4d770f9b2d179dec",
+        "android_client_info": {
+          "package_name": "ir.agaring.mylearncompose"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5SabxbA2Tkbb6nbje2NIuWmzVuxoVj8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

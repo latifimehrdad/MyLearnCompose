@@ -18,6 +18,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ir.agaring.mylearncompose.weather.navigation.WeatherScreens
+import ir.agaring.mylearncompose.weather.screens.setting.SettingViewModel
 import ir.agaring.mylearncompose.weather.widgets.HumidityWindPressureRow
 import ir.agaring.mylearncompose.weather.widgets.SunSetSunRise
 import ir.agaring.mylearncompose.weather.widgets.WeatherAppBar
@@ -43,8 +48,18 @@ import ir.agaring.mylearncompose.weather.widgets.WeatherStateImage
 fun MainScreen(
     navController: NavController,
     viewModel: MainViewModel = hiltViewModel(),
-    city: String?
+    city: String?,
+    settingViewModel: SettingViewModel = hiltViewModel()
 ) {
+
+    val unitFromDb = settingViewModel.unitList.collectAsState().value
+    val unit by remember {
+        mutableStateOf("imperial")
+    }
+    val isImperial by remember {
+        mutableStateOf(false)
+    }
+
     /*    val weatherData = produceState<DataOrException<ArrayList<QuestionItem>,
                 Boolean,
                 Exception>>(initialValue = DataOrException(loading = true)) {

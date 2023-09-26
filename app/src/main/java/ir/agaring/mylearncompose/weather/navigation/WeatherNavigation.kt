@@ -7,9 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import ir.agaring.mylearncompose.weather.screens.SettingsScreen
+import ir.agaring.mylearncompose.weather.screens.setting.SettingsScreen
 import ir.agaring.mylearncompose.weather.screens.about.AboutScreen
 import ir.agaring.mylearncompose.weather.screens.favorite.FavoriteScreen
+import ir.agaring.mylearncompose.weather.screens.favorite.FavoriteViewModel
 import ir.agaring.mylearncompose.weather.screens.main.MainScreen
 import ir.agaring.mylearncompose.weather.screens.main.MainViewModel
 import ir.agaring.mylearncompose.weather.screens.search.SearchScreen
@@ -60,7 +61,8 @@ fun WeatherNavigation() {
 
 
         composable(route = WeatherScreens.FavoriteScreen.name) {
-            FavoriteScreen(navController = navController)
+            val viewModel = hiltViewModel<FavoriteViewModel>()
+            FavoriteScreen(navController = navController, favoriteViewModel = viewModel)
         }
 
 
