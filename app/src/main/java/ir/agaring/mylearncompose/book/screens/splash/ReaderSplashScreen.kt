@@ -45,7 +45,8 @@ fun ReaderSplashScreen(navController: NavHostController) {
                 OvershootInterpolator(8f).getInterpolation(it)
             }))
         delay(2000L)
-        navController.navigate(route = ReaderScreens.LoginScreen.name)
+//        navController.navigate(route = ReaderScreens.LoginScreen.name)
+        navController.navigate(route = ReaderScreens.ReaderHomeScreen.name)
     }
 
     Surface(

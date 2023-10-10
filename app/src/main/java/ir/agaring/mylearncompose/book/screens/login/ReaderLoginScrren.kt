@@ -32,12 +32,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import ir.agaring.mylearncompose.R
 import ir.agaring.mylearncompose.book.component.EmailInput
 import ir.agaring.mylearncompose.book.component.PasswordInput
 import ir.agaring.mylearncompose.book.component.ReaderLogo
 import ir.agaring.mylearncompose.book.component.SubmitButton
+import ir.agaring.mylearncompose.book.navigation.ReaderScreens
 
 /**
  * Created by m-latifi on 9/20/2023.
@@ -45,7 +47,8 @@ import ir.agaring.mylearncompose.book.component.SubmitButton
 
 @Composable
 fun ReaderLoginScreen(
-    navController: NavHostController) {
+    navController: NavHostController,
+    viewModel: LoginScreenViewModel = hiltViewModel()) {
 
     val showLoginForm = rememberSaveable { mutableStateOf(true) }
 
@@ -61,14 +64,16 @@ fun ReaderLoginScreen(
                     loading = false,
                     isCreateAccount = false
                 ) { email, password ->
-                    Log.d("meri", "ReaderLoginScreen : $email $password")
+                    viewModel.login(email, password) {
+                        navController.navigate(route = ReaderScreens.ReaderHomeScreen.name)
+                    }
                 }
             else
                 UserForm(
                     loading = false,
                     isCreateAccount = true
                 ) { email, password ->
-                    //Todo : FB Login
+                    //Todo : FB create account
                 }
 
         }
