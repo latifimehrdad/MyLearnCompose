@@ -2,6 +2,7 @@ package ir.agaring.mylearncompose.book.screens.home
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -18,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Login
 import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material3.Card
@@ -54,6 +57,7 @@ import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import ir.agaring.mylearncompose.R
+import ir.agaring.mylearncompose.book.component.BookRating
 import ir.agaring.mylearncompose.book.component.FabContent
 import ir.agaring.mylearncompose.book.component.ReaderAppBar
 import ir.agaring.mylearncompose.book.component.TitleSection
@@ -165,7 +169,6 @@ fun ListCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         modifier = Modifier
             .padding(16.dp)
-            .height(242.dp)
             .width(202.dp)
             .clickable {
                 onPressDetail.invoke(book.title.toString())
@@ -188,17 +191,72 @@ fun ListCard(
 
                 Spacer(modifier = Modifier.width(50.dp))
 
-                Column() {
+                Column(modifier = Modifier.padding(top = 25.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally) {
 
+                    Icon(imageVector = Icons.Default.FavoriteBorder, contentDescription = "Fav Icon",
+                        modifier = Modifier.padding(bottom = 1.dp))
+
+                    BookRating(score = 3.5)
                 }
 
             }
+
+            Text(text = "Book title",
+                modifier = Modifier.padding(4.dp),
+                fontWeight = FontWeight.Bold,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            Text(text = "Authors : All...",
+                modifier = Modifier.padding(4.dp),
+                style = MaterialTheme.typography.labelSmall)
+
         }
+
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.Bottom
+        ) {
+            RoundedButton(
+                label = "Reading",
+                radius = 70
+            )
+        }
+
     }
 
 }
 //-------------------------------------------------------------------------------------------------- ListCard
 
+
+//-------------------------------------------------------------------------------------------------- RoundedButton
+@Preview
+@Composable
+fun RoundedButton(
+    label: String = "Reading",
+    radius: Int = 29,
+    onPress: () -> Unit = {}
+) {
+    Surface(
+        modifier = Modifier
+            .clip(RoundedCornerShape(topStartPercent = radius, bottomEndPercent = radius)),
+        color = Color(0xFF92CBDF)
+    ) {
+        Column(modifier = Modifier
+            .width(90.dp)
+            .heightIn(40.dp)
+            .clickable { onPress.invoke() },
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = label, style = TextStyle(color = Color.White, fontSize = 15.sp))
+        }
+    }
+}
+//-------------------------------------------------------------------------------------------------- RoundedButton
 
 
 
